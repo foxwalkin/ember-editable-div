@@ -1,0 +1,1 @@
+export { default } from 'ember-editable-div/components/editable-div';
