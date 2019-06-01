@@ -1,29 +1,17 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { run } from '@ember/runloop';
-import layout from '../templates/components/editable-div';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  layout,
-  classNames: ['editable-div'],
-  attributeBindings: ['contenteditable', 'dataText:data-text'],
-  contenteditable: true,
-  dataText: computed('placeholder', function() {
-    return this.get('placeholder');
-  }),
-  placeholder: '',
-  value: '',
+export default class EditableDiv extends Component {
+  @tracked _value;
 
-  keyDown(event) {
-    this._setText();
-  },
-
-  keyUp() {
-    this._setText();
-  },
-
-  _setText() {
-    let text = document.getElementById(this.get('elementId')).innerHTML;
-    this.set('value', text);
+  get value() {
+    return this._value || this.args.value;
   }
-});
+
+  @action setText(event) {
+    const text = event.target.value;
+
+    this._value = text;
+  }
+}
