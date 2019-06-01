@@ -31,8 +31,11 @@ ember install ember-editable-div
 Usage
 ------------------------------------------------------------------------------
 
-Will be filled in later.
+Example:
 
+<EditableDiv @value={{textProperty}} @placeholder="Please type something." />
+
+Whatever property you put as value will be where the text is stored.
 
 Contributing
 ------------------------------------------------------------------------------

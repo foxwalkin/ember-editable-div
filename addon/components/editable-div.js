@@ -1,18 +1,29 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { run } from '@ember/runloop';
 import layout from '../templates/components/editable-div';
 
 export default Component.extend({
   layout,
-  attributeBindings: ['contenteditable'],
+  classNames: ['editable-div'],
+  attributeBindings: ['contenteditable', 'dataText:data-text'],
   contenteditable: true,
+  dataText: computed('placeholder', function() {
+    return this.get('placeholder');
+  }),
   placeholder: '',
-  text: '',
+  value: '',
 
   keyDown(event) {
-    console.log('in keyDown');
+    this._setText();
   },
 
   keyUp() {
-    console.log('in keyUp');
+    this._setText();
+  },
+
+  _setText() {
+    let text = document.getElementById(this.get('elementId')).innerHTML;
+    this.set('value', text);
   }
 });
