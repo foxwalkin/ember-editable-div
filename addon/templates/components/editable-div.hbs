@@ -1,0 +1,10 @@
+Div should be here
+<div
+  contenteditable=true
+  data-text={{@placeholder}}
+  style="border: 1px solid; padding: 20px;"
+  {{on 'keydown' this.setText}}
+  {{on 'keyup' this.setText}}
+>
+  {{this.value}}
+</div>
